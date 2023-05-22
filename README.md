@@ -1,1 +1,3 @@
-Проект "Навык для алисы" для вуза по дисциплине ОПД(основы проектной деятельности)
+# README
+The app in this repo is deployed at [https://alisa-opd.onrender.com](https://alisa-opd.onrender.com).
+
