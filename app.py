@@ -17,7 +17,7 @@ def main():
         'session': request.json['session'],
         "response":{
             "end_session":False,
-            "text" : text,
+            "text" : str(text),
         }
     }
     return json.dumps(response)
