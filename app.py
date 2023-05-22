@@ -20,3 +20,4 @@ def main(event, context):
             "text" : text,
         }
     }
+    return json.dumps(response)
