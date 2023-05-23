@@ -21,7 +21,7 @@ def get_data_gpt(message):
     )
 
     if len(response.choices) > 0:
-        response_json = json.loads(response)
+        response_json = json.loads(response.choices[0].text.strip())
         response_gpt = f"{response_json['group']} {response_json['date']}"
         return response_gpt
     else:
