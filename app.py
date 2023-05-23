@@ -10,7 +10,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 def get_data_gpt(message):
-    message_text = f'у меня есть строка "{message}" . вытащи из неё номер группы и дату.'+'в виде {"group":"","date":""}'
+    message_text = f'у меня есть строка "{message}" . вытащи из неё номер группы и дату.Никаких лишних слов, ' \
+                   f'чистые данные'+'в json формате {"group":"","date":""}'
     response = openai.Completion.create(
         engine='text-davinci-003',
         prompt=message_text,
