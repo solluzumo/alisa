@@ -57,8 +57,10 @@ def main():
                 print(f"Bad format:{request_text}")
 
         try:  #пытаемся достать из базы данных расписание
-            db_response = db.fetchall("lesson", f"{response_gpt[0]};{response_gpt[1]}",
+            splited_response = response_gpt.split()
+            db_response = db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
                                       ["audience", "teacher", "start", "end"])
+
             text = ""
             for s in db_response:
                 for i in s:
