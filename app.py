@@ -30,7 +30,6 @@ def get_data_gpt(message):
 @app.route("/",methods=["POST"])
 def main():
     logging.info(request.json)
-    print(os.getenv("GPT_API"))
     req = request.json
     response = {
         'version': req['version'],
