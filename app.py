@@ -58,7 +58,7 @@ def main():
 
         try:  #пытаемся достать из базы данных расписание
             splited_response = response_gpt.split()
-            db_response = [list(el) for el in db.fetchall("lesson", f"432-3;24.05.2023",
+            db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
                                                           ["group_name","name", "audience", "start", "end"])]
             text = ""
             for el in range(len(db_response)):
