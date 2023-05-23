@@ -62,7 +62,7 @@ def main():
                                                           ["name", "audience", "start", "end"])]
             text = ""
             for el in range(len(db_response)):
-                text += f"Занятие {db_response[el][0]}\n\tАудитория: {db_response[el][1]}\n\tВремя начала: {db_response[el][2]}\n\tВремя конца: {db_response[el][3]}\n"
+                text += f"{db_response[el][0]}\n\t\tАудитория: {db_response[el][1]}\n\t\tВремя начала: {db_response[el][2]}\n\t\tВремя конца: {db_response[el][3]}\n"
             response["response"]["text"] = text
         except:
             response["response"][
