@@ -4,12 +4,13 @@ import json
 import logging
 import openai
 import os
-openai.api_key = os.getenv("GPT_API")
+
 app = Flask(__name__)
 logging.basicConfig(level=logging.DEBUG)
 
 
 def get_data_gpt(message):
+    openai.api_key = os.getenv("GPT_API")
     message_text = f'у меня есть строка "{message}" . вытащи из неё номер группы и дату.Никаких лишних слов, ' \
                    f'чистые данные'+'в json формате {"group":"","date":""}'
     response = openai.Completion.create(
@@ -29,7 +30,7 @@ def get_data_gpt(message):
 @app.route("/",methods=["POST"])
 def main():
     logging.info(request.json)
-
+    print(os.getenv("GPT_API"))
     req = request.json
     response = {
         'version': req['version'],
