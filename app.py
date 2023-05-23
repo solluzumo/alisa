@@ -51,6 +51,7 @@ def main():
                 response_json = json.loads(request_text)
                 response_gpt = f"{response_json['group']} {response_json['date']}"
                 hooker -=1
+                print(f"Succeed:{response_gpt}")
             except:
                 print(f"Bad format:{request_text}")
 
