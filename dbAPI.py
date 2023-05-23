@@ -22,7 +22,7 @@ def fetchall(table:str, request_info: str, columns: List[str]) -> List[Tuple]:
     requested_date = request_info.split(";")[1]
 
     sql.execute(f"SELECT {columns_joined} FROM {table} "
-                f"where group_name = '{group_name}' or "
+                f"where group_name = '{group_name}' and "
                 f"date_lesson = '{requested_date}'")
     rows = sql.fetchall()
 
