@@ -51,10 +51,10 @@ def main():
                 response_gpt = f"{response_json['group']} {response_json['date']}"
                 hooker -=1
             except:
-                print("Bad format")
+                print(f"Bad format:{request_text}")
 
         try:  #пытаемся достать из базы данных расписание
-            db_response = db.fetchall("lesson", f"{request_text[0]};{request_text[1]}",
+            db_response = db.fetchall("lesson", f"{response_gpt[0]};{response_gpt[1]}",
                                       ["audience", "teacher", "start", "end"])
             text = ""
             for s in db_response:
