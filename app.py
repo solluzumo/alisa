@@ -51,10 +51,10 @@ def main():
                 response_json = json.loads(request_text)
                 response_gpt = f"{response_json['group']} {response_json['date']}"
                 hooker -=1
-                print(f"Succeed:{response_gpt}")
                 break
             except:
-                print(f"Bad format:{request_text}")
+                response["response"]["text"] = "ChatGPT не в духе, попробуй снова"
+                return json.dumps(response)
 
         try:  #пытаемся достать из базы данных расписание
             splited_response = response_gpt.split()
