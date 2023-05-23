@@ -21,9 +21,7 @@ def get_data_gpt(message):
     )
 
     if len(response.choices) > 0:
-        response_json = json.loads(response.choices[0].text.strip())
-        response_gpt = f"{response_json['group']} {response_json['date']}"
-        return response_gpt
+        return response.choices[0].text.strip()
     else:
         return False
 
@@ -39,12 +37,21 @@ def main():
             "end_session":False,
         }
     }
+    hooker = 5
     #Если диалог новый, то мы приветствуем пользователя
     if req['session']['new']:
         response["response"]["text"] = "Привет, чтобы получить расписание, скажи мне номер группы и дату!"
     else:
-        #получаем из ответа пользователя нужные данные используя chat gpt
-        request_text = get_data_gpt(req['request']['original_utterance'])
+        while hooker>0:
+            #получаем из ответа пользователя нужные данные используя chat gpt
+            request_text = get_data_gpt(req['request']['original_utterance'])
+            #преобразуем данные в строку
+            try:
+                response_json = json.loads(request_text)
+                response_gpt = f"{response_json['group']} {response_json['date']}"
+                hooker -=1
+            except:
+                print("Bad format")
 
         try:  #пытаемся достать из базы данных расписание
             db_response = db.fetchall("lesson", f"{request_text[0]};{request_text[1]}",

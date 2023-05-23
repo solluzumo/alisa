@@ -1,7 +1,7 @@
 import openai
 import json
 # Установите ваш API-ключ
-openai.api_key = ''
+openai.api_key = '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'
 
 
 def send_chat_request(message):
