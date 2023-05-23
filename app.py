@@ -62,7 +62,7 @@ def main():
                                                           ["group_name","name", "audience", "start", "end"])]
             text = ""
             for el in range(len(db_response)):
-                text += f"Расписание для {db_response[0]}\n" \
+                text += f"Расписание для {db_response[el][0]}\n" \
                         f"{db_response[el][1]}\n\t\t" \
                         f"Аудитория: {db_response[el][2]}\n\t\t" \
                         f"Время начала: {db_response[el][3]}\n\t\t" \
