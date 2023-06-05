@@ -53,6 +53,7 @@ def main():
             #преобразуем данные в строку
             try:
                 response_json = json.loads(request_text)
+                print(f"response_json={response_json}")
                 response_gpt = f"{response_json['group']} {response_json['date']}"
                 hooker -=1
                 break
