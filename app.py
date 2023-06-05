@@ -25,7 +25,7 @@ def get_data_gpt(message):
         n=1,
         stop=None
     )
-
+    print(response.choices[0].text.strip())
     if len(response.choices) > 0:
         return response.choices[0].text.strip()
     else:
