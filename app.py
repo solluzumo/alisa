@@ -11,8 +11,8 @@ logging.basicConfig(level=logging.DEBUG)
 
 def get_data_gpt(message):
     openai.api_key = os.getenv("GPT_API")
-    message_text = f'у меня есть строка "{message}" . вытащи из неё номер группы и дату.Никаких лишних слов, ' \
-                   f'чистые данные'+'в json формате {"group":"","date":""}'
+    message_text = f'у меня есть строка "{message}" . представь данные о номере группы и дате в виде json файла, без кода, ты должен сам представить мне данные, например в '+'виде {"group":"201-3", "date":"02.12.2012"},' +f'по возможности слова "завтра", "послезавтра" и т.д преобразуй в конкретную дату, относительно этой даты "{ate_time_str}", то есть если сейчас 12 июня, то завтра это 13 июня и т.д, в дате в качестве разделителя используй точки'
+
     response = openai.Completion.create(
         engine='text-davinci-003',
         prompt=message_text,
