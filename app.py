@@ -58,11 +58,11 @@ def main():
 
         try:  #пытаемся достать из базы данных расписание
             splited_response = response_gpt.split()
-            db_response = [list(el) for el in db.fetchall("lesson", f"432-3;24.05.2023",
+            db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
                                                           ["group_name","name", "audience", "start", "end"])]
             text = ""
             for el in range(len(db_response)):
-                text += f"Расписание для {db_response[0]}\n" \
+                text += f"Расписание для {db_response[el][0]}\n" \
                         f"{db_response[el][1]}\n\t\t" \
                         f"Аудитория: {db_response[el][2]}\n\t\t" \
                         f"Время начала: {db_response[el][3]}\n\t\t" \
