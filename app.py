@@ -55,9 +55,10 @@ def main():
                 response_json = json.loads(request_text)
                 print(f"response_json={response_json}")
                 response_gpt = f"{response_json['group']} {response_json['date']}"
-                hooker -=1
+                
                 break
             except:
+                hooker -=1
                 response["response"]["text"] = "ChatGPT не в духе, попробуй снова"
                 return json.dumps(response)
 
