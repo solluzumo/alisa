@@ -15,7 +15,7 @@ def get_data_gpt(message):
     now = datetime.now()
 
     ate_time_str = now.strftime("%d-%m-%Y")
-    message_text = f'у меня есть строка "{message}" . представь данные о номере группы и дате в виде json файла, без кода, ты должен сам представить мне данные, например в '+'виде {"group":"201-3", "date":"3 июня"},' +f',дата должна быть в формате число и месяц, месяц словами, то есть не 03.06, а 03 июня по возможности слова "завтра", "послезавтра" и т.д преобразуй в конкретную дату, относительно этой даты "{ate_time_str}", то есть если сейчас 12 июня, то завтра это 13 июня и т.д, в дате в качестве разделителя используй точки'
+    message_text = f'у меня есть строка "{message}" . представь данные о номере группы и дате в виде json файла, без кода, ты должен сам представить мне данные, например в '+'виде {"group":"201-3", "date":"3 июня"},' +f',дата должна быть в формате число и месяц, месяц словами, то есть не "03.06", а "03 июня" по возможности слова "завтра", "послезавтра" и т.д преобразуй в конкретную дату, относительно этой даты "{ate_time_str}", то есть если сейчас 12 июня, то завтра это 13 июня и т.д, в дате в качестве разделителя используй точки.'
 
     response = openai.Completion.create(
         engine='text-davinci-003',
@@ -91,7 +91,7 @@ def main():
         try:  #пытаемся достать из базы данных расписание
             splited_response = response_gpt.split()
 
-            db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
+            db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]+splited_response[2]}",
                                                           ["group_name","name", "audience", "start", "end"])]
             print(splited_response)
             print(db_response)
