@@ -15,7 +15,7 @@ def get_data_gpt(message):
     now = datetime.now()
 
     ate_time_str = now.strftime("%d-%m-%Y")
-    message_text = f'у меня есть строка "{message}" . представь данные о номере группы и дате в виде json файла, без кода, ты должен сам представить мне данные, например в '+'виде {"group":"201-3", "date":"3 июня"},' +f',дата должна быть в формате число и месяц, месяц словами, то есть не "03.06", а "03 июня" по возможности слова "завтра", "послезавтра" и т.д преобразуй в конкретную дату, относительно этой даты "{ate_time_str}", то есть если сейчас 12 июня, то завтра это 13 июня и т.д, в дате в качестве разделителя используй точки.'
+    message_text = f'у меня есть строка "{message}" . представь данные о номере группы и дате в виде json файла, без кода, ты должен сам представить мне данные, например в '+'виде {"group":"201-3", "date":"03.06.2023"},' +f'по возможности слова "завтра", "послезавтра" и т.д преобразуй в конкретную дату, относительно этой даты "{ate_time_str}", то есть если сейчас 12 июня, то завтра это 13 июня и т.д, в дате в качестве разделителя используй точки.'
 
     response = openai.Completion.create(
         engine='text-davinci-003',
@@ -53,34 +53,8 @@ def main():
             #преобразуем данные в строку
             try:
                 response_json = json.loads(request_text)
-                month = response_json['date'].split(".")[1]
-                day = ""
-                if month=="05":
-                    month = " мая"
-                if month=="06":
-                    month = " июня"
-                if response_json['date'].split(".")[0] == "1":
-                    day = "01"
-                if response_json['date'].split(".")[0] == "2":
-                    day = "02"
-                if response_json['date'].split(".")[0] == "3":
-                    day = "03"
-                if response_json['date'].split(".")[0] == "5":
-                    day = "05"
-                if response_json['date'].split(".")[0] == "6":
-                    day = "06"
-                if response_json['date'].split(".")[0] == "7":
-                    day = "07"
-                if response_json['date'].split(".")[0] == "8":
-                    day = "08"
-                if response_json['date'].split(".")[0] == "9":
-                    day = "09"
-                else:
-                    day = response_json['date'].split(".")[0]
-                print(response_json['date'].split("."))
-                response_date = day+month
-
-                response_gpt = f"{response_json['group']} {response_date}"
+               
+                response_gpt = f"{response_json['group']} {response_json['date']}"
                 
                 break
             except:
