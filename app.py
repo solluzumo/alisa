@@ -76,7 +76,7 @@ def main():
                 if response_json['date'].split(".")[0] == "9":
                     day = "09"
                 response_date = day+month
-                print(f"response_json={response_json}")
+
                 response_gpt = f"{response_json['group']} {response_date}"
                 
                 break
@@ -90,6 +90,7 @@ def main():
 
             db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
                                                           ["group_name","name", "audience", "start", "end"])]
+            print(splited_response)
             print(db_response)
             text = ""
             for el in range(len(db_response)):
