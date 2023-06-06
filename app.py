@@ -53,8 +53,31 @@ def main():
             #преобразуем данные в строку
             try:
                 response_json = json.loads(request_text)
+                month = response_json['date'].split(".")[1]
+                day = ""
+                if month=="05":
+                    month = " мая"
+                if month=="06":
+                    month = " июня"
+                if response_json['date'].split(".")[0] == "1":
+                    day = "01"
+                if response_json['date'].split(".")[0] == "2":
+                    day = "02"
+                if response_json['date'].split(".")[0] == "3":
+                    day = "03"
+                if response_json['date'].split(".")[0] == "5":
+                    day = "05"
+                if response_json['date'].split(".")[0] == "6":
+                    day = "06"
+                if response_json['date'].split(".")[0] == "7":
+                    day = "07"
+                if response_json['date'].split(".")[0] == "8":
+                    day = "08"
+                if response_json['date'].split(".")[0] == "9":
+                    day = "09"
+                response_date = day+month
                 print(f"response_json={response_json}")
-                response_gpt = f"{response_json['group']} {response_json['date']}"
+                response_gpt = f"{response_json['group']} {response_date}"
                 
                 break
             except:
@@ -64,6 +87,7 @@ def main():
 
         try:  #пытаемся достать из базы данных расписание
             splited_response = response_gpt.split()
+
             db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
                                                           ["group_name","name", "audience", "start", "end"])]
             print(db_response)
