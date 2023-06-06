@@ -25,7 +25,7 @@ def get_data_gpt(message):
         n=1,
         stop=None
     )
-
+    print(response.choices[0].text.strip())
     if len(response.choices) > 0:
         return response.choices[0].text.strip()
     else:
@@ -53,10 +53,12 @@ def main():
             #преобразуем данные в строку
             try:
                 response_json = json.loads(request_text)
+                print(f"response_json={response_json}")
                 response_gpt = f"{response_json['group']} {response_json['date']}"
-                hooker -=1
+                
                 break
             except:
+                hooker -=1
                 response["response"]["text"] = "ChatGPT не в духе, попробуй снова"
                 return json.dumps(response)
 
@@ -64,7 +66,7 @@ def main():
             splited_response = response_gpt.split()
             db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
                                                           ["group_name","name", "audience", "start", "end"])]
-            text = ""
+            text = "123"
             for el in range(len(db_response)):
                 text += f"Расписание для {db_response[el][0]}\n" \
                         f"{db_response[el][1]}\n\t\t" \
