@@ -75,6 +75,9 @@ def main():
                     day = "08"
                 if response_json['date'].split(".")[0] == "9":
                     day = "09"
+                else:
+                    day = response_json['date'].split(".")[0]
+                print(response_json['date'].split("."))
                 response_date = day+month
 
                 response_gpt = f"{response_json['group']} {response_date}"
