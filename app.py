@@ -67,6 +67,7 @@ def main():
             db_response = [list(el) for el in db.fetchall("lesson", f"{splited_response[0]};{splited_response[1]}",
                                                           ["group_name","name", "audience", "start", "end"])]
             print(db_response)
+            text = ""
             for el in range(len(db_response)):
                 text += f"Расписание для {db_response[el][0]}\n" \
                         f"{db_response[el][1]}\n\t\t" \
